@@ -92,11 +92,10 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
         }
         log.info("sql={}", sql);
 
-        return template.query(sql, itemRowMapper());
+        return template.query(sql, itemRowMapper(), param.toArray());
     }
 
     private RowMapper<Item> itemRowMapper() {
-
         return ((rs, rowNum) -> {
             Item item = new Item();
             item.setId(rs.getLong("id"));
